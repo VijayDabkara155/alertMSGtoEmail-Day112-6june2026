@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alertmanager-config
+  namespace: monitoring
+data:
+  alertmanager.yml: |
+    global:
+      smtp_smarthost: 'smtp.gmail.com:587'
+      smtp_from: 'vijaydabkara@gmail.com'
+      smtp_auth_username: 'vijaydabkara@gmail.com'
+      smtp_auth_password: 'xxxx xxxx xxxx xxxx'
+    route:
+      receiver: notifications
+    receivers:
+    - name: notifications
+
+      slack_configs:
+      - api_url: "https://hooks.slack.com/services/xxx/yyy/zzz"
+        channel: "#alerts"
+        send_resolved: true
+
+      email_configs:
+      - to: 'vijayporwal2208@gmail.com'
+        send_resolved: true
